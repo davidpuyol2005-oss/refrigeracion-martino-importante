@@ -273,12 +273,13 @@ body {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: background var(--transition-normal), border-bottom var(--transition-normal);
+    transition: height var(--transition-normal), background var(--transition-normal), border-bottom var(--transition-normal);
     display: flex;
     align-items: center;
 }
 
 .main-header.scrolled {
+    height: 70px;
     background: rgba(6, 11, 25, 0.85);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -300,6 +301,12 @@ body {
     font-weight: 800;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.logo span {
+    white-space: nowrap;
 }
 
 .logo-icon {
@@ -320,7 +327,7 @@ body {
 
 .nav-menu {
     display: flex;
-    gap: 32px;
+    gap: 20px;
 }
 
 .nav-link {
@@ -398,7 +405,7 @@ body {
    HERO SECTION
    ========================================================================== */
 .hero-section {
-    padding-top: calc(var(--header-height) + 60px);
+    padding-top: calc(var(--header-height) + 100px);
     padding-bottom: 80px;
     position: relative;
 }
@@ -650,8 +657,20 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+}
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .service-card {
@@ -738,12 +757,15 @@ body {
 .service-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     color: var(--primary);
     font-weight: 600;
     text-decoration: none;
     font-size: 0.95rem;
     transition: gap var(--transition-fast);
+    margin-top: auto;
+    align-self: stretch;
 }
 
 .service-link:hover {
@@ -1110,7 +1132,7 @@ body {
     width: 100%;
     max-width: 1000px;
     margin: 40px auto 0 auto;
-    padding: 0 60px;
+    padding: 0 80px;
     box-sizing: border-box;
 }
 
@@ -1163,11 +1185,11 @@ body {
 }
 
 .carousel-nav.prev {
-    left: 0;
+    left: 15px;
 }
 
 .carousel-nav.next {
-    right: 0;
+    right: 15px;
 }
 
 .carousel-indicators {
@@ -1626,28 +1648,8 @@ body.light-theme .carousel-indicators .indicator.active {
     }
 }
 
-@media (max-width: 768px) {
-    html {
-        font-size: 14px;
-    }
-    
-    .hero-content h1 {
-        font-size: 3rem;
-        letter-spacing: -1px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 30px 20px;
-    }
-    
-    .stat-divider {
-        width: 60%;
-        height: 1px;
-        margin: 0 auto;
-    }
-    
+@media (max-width: 1100px) {
+    /* Navigation responsive controls activated at 1100px */
     .mobile-nav-toggle {
         display: block;
     }
@@ -1665,12 +1667,17 @@ body.light-theme .carousel-indicators .indicator.active {
         align-items: center;
         justify-content: center;
         gap: 40px;
-        transition: left 0.4s ease;
+        transition: left 0.4s ease, top var(--transition-normal), height var(--transition-normal);
         border-top: 1px solid var(--border-color);
     }
     
     .nav-menu.open {
         left: 0;
+    }
+    
+    .main-header.scrolled .nav-menu {
+        top: 70px;
+        height: calc(100vh - 70px);
     }
     
     .nav-link {
@@ -1688,6 +1695,34 @@ body.light-theme .carousel-indicators .indicator.active {
     
     .btn-phone i {
         margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem;
+        letter-spacing: -1px;
+    }
+    
+    .hero-section {
+        padding-top: calc(var(--header-height) + 40px);
+        padding-bottom: 60px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 30px 20px;
+    }
+    
+    .stat-divider {
+        width: 60%;
+        height: 1px;
+        margin: 0 auto;
     }
     
     .form-row {
@@ -1937,6 +1972,17 @@ body.light-theme {
     
     --primary: hsl(197, 100%, 42%);       /* Darker primary for light mode contrast */
     --secondary: hsl(206, 100%, 48%);     /* Darker secondary for light mode contrast */
+}
+
+body.light-theme .btn-secondary {
+    background: rgba(6, 11, 25, 0.04);
+    color: var(--text-primary);
+    border-color: rgba(6, 11, 25, 0.12);
+}
+
+body.light-theme .btn-secondary:hover {
+    background: rgba(6, 11, 25, 0.08);
+    border-color: rgba(6, 11, 25, 0.2);
 }
 
 /* Light Theme Element Customizations */
